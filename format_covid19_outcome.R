@@ -8,8 +8,6 @@ library(MVMR)
 library(ieugwasr)
 
 
-
-
 convert2outcome <- function(gwas, outcome, output) {
 
 gwas_outcome_format <-

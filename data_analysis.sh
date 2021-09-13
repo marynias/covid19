@@ -1,5 +1,4 @@
-  
-#!/bin/bash
+ #!/bin/bash
 HOME=/mnt/storage/home/qh18484/scratch
 scripts=/mnt/storage/home/qh18484/bin/covid19
 analysis=$HOME/covid19
@@ -44,7 +43,26 @@ wget https://storage.googleapis.com/covid19-hg-public/20201215/results/20210107/
 Rscript --vanilla $scripts/format_covid19_outcome.R
 
 #Clump instruments for selenium and vitamin K1.
-Rscript --vanilla $scripts/clump_exposures.
+Rscript --vanilla $scripts/clump_exposures.R
+
+#Substitute proxies for 3 SNPs in outcome data.
+Rscript --vanilla $scripts/substitute_proxy.R
+
+var1=$scripts/substitute_proxy.R
+sbatch --export=ALL,input=$var1 $scripts/sub_script.sh
+
+#Analysis of weaker instruments (p-value < 1e-5) from Evans et al. for zinc, copper and selenium
+Rscript --vanilla $scripts/obtain_evans_hits.R
+
+while read line
+do
+    set -- $line
+    echo $1
+    zcat COVID19_HGI_C2_ALL_eur_leave_23andme_20210107.txt.gz | grep -w $1
+done < covid19_proxy.txt
+
+#Run basic MR analysis
+Rscript --vanilla $scripts/covid19_mr_analysis.R
 
 
 

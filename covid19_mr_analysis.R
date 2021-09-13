@@ -69,15 +69,19 @@ simplemr <- function(instrument_file, GWAS_file, GWAS_phenotype, exposure) {
 
 	p1 <- mr_scatter_plot(mr, dat)
 	ggsave(p1[[1]], file=paste0(output_file, "_scatterplot.pdf"), width=7, height=7)
+	#ggsave(p1[[1]], file=paste0(output_file, "_scatterplot.png"), width=7, height=7)
 
 	p2 <- mr_forest_plot(single_snp)
 	ggsave(p2[[1]], file=paste0(output_file, "_forestplot.pdf"), width=7, height=7)
+	#ggsave(p2[[1]], file=paste0(output_file, "_forestplot.png"), width=7, height=7)
 
 	p3 <- mr_leaveoneout_plot(leave1out)
 	ggsave(p3[[1]], file=paste0(output_file, "_leave1out.pdf"), width=7, height=7)
+	#ggsave(p3[[1]], file=paste0(output_file, "_leave1out.png"), width=7, height=7)
 
 	p4 <- mr_funnel_plot(single_snp)
 	ggsave(p4[[1]], file=paste0(output_file, "_singlesnp.pdf"), width=7, height=7)
+	#ggsave(p4[[1]], file=paste0(output_file, "_singlesnp.png"), width=7, height=7)
 }
 
 instrument_file <- "copper_instruments.txt"
@@ -87,10 +91,23 @@ exposure <- "copper"
 simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
 
 
+instrument_file <- "copper_subsignificant.txt"
+GWAS_file <- "COVID19_HGI_C2_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
+GWAS_phenotype <- "SARS-CoV-2_infection"
+exposure <- "copper_subsignificant.txt"
+simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
+
+
 instrument_file <- "zinc_instruments.txt"
 GWAS_file <- "COVID19_HGI_C2_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
 GWAS_phenotype <- "SARS-CoV-2_infection"
 exposure <- "zinc"
+simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
+
+instrument_file <- "zinc_subsignificant.txt"
+GWAS_file <- "COVID19_HGI_C2_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
+GWAS_phenotype <- "SARS-CoV-2_infection"
+exposure <- "zinc_subsignificant"
 simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
 
 
@@ -101,10 +118,17 @@ exposure <- "selenium_meta"
 simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
 
 
-instrument_file <- "selenium2_instruments.txt"
+instrument_file <- "selenium_subsignificant_alspac.txt"
 GWAS_file <- "COVID19_HGI_C2_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
 GWAS_phenotype <- "SARS-CoV-2_infection"
-exposure <- "selenium_toenail"
+exposure <- "selenium_subsignificant_alspac"
+simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
+
+
+instrument_file <- "selenium_subsignificant_qimr.txt"
+GWAS_file <- "COVID19_HGI_C2_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
+GWAS_phenotype <- "SARS-CoV-2_infection"
+exposure <- "selenium_subsignificant_qimr"
 simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
 
 
@@ -113,8 +137,6 @@ GWAS_file <- "COVID19_HGI_C2_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
 GWAS_phenotype <- "SARS-CoV-2_infection"
 exposure <- "vitamin_K1"
 simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
-
-
 
 
 instrument_file <- "copper_instruments.txt"
@@ -124,10 +146,23 @@ exposure <- "copper"
 simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
 
 
+instrument_file <- "copper_subsignificant.txt"
+GWAS_file <- "COVID19_HGI_B2_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
+GWAS_phenotype <- "Hospitalized_(ver_population)"
+exposure <- "copper_subsignificant"
+simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
+
+
 instrument_file <- "zinc_instruments.txt"
 GWAS_file <- "COVID19_HGI_B2_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
 GWAS_phenotype <- "Hospitalized_(ver_population)"
 exposure <- "zinc"
+simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
+
+instrument_file <- "zinc_subsignificant.txt"
+GWAS_file <- "COVID19_HGI_B2_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
+GWAS_phenotype <- "Hospitalized_(ver_population)"
+exposure <- "zinc_subsignificant"
 simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
 
 
@@ -144,6 +179,19 @@ GWAS_phenotype <- "Hospitalized_(ver_population)"
 exposure <- "selenium_toenail"
 simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
 
+instrument_file <- "selenium_subsignificant_qimr.txt"
+GWAS_file <- "COVID19_HGI_B2_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
+GWAS_phenotype <- "Hospitalized_(ver_population)"
+exposure <- "selenium_subsignificant_qimr"
+simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
+
+
+instrument_file <- "selenium_subsignificant_alspac.txt"
+GWAS_file <- "COVID19_HGI_B2_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
+GWAS_phenotype <- "Hospitalized_(ver_population)"
+exposure <- "selenium_subsignificant_alspac"
+simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
+
 
 instrument_file <- "vitamink_instruments.txt"
 GWAS_file <- "COVID19_HGI_B2_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
@@ -152,6 +200,12 @@ exposure <- "vitamin_K1"
 simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
 
 
+
+instrument_file <- "copper_subsignificant.txt"
+GWAS_file <- "COVID19_HGI_B1_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
+GWAS_phenotype <- "Hospitalized_(ver_non-hospitalised)"
+exposure <- "copper_subsignificant"
+simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
 
 instrument_file <- "copper_instruments.txt"
 GWAS_file <- "COVID19_HGI_B1_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
@@ -166,6 +220,12 @@ GWAS_phenotype <- "Hospitalized_(ver_non-hospitalised)"
 exposure <- "zinc"
 simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
 
+instrument_file <- "zinc_subsignificant.txt"
+GWAS_file <- "COVID19_HGI_B1_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
+GWAS_phenotype <- "Hospitalized_(ver_non-hospitalised)"
+exposure <- "zinc_subsignificant"
+simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
+
 
 instrument_file <- "selenium1_instruments.txt"
 GWAS_file <- "COVID19_HGI_B1_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
@@ -178,6 +238,19 @@ instrument_file <- "selenium2_instruments.txt"
 GWAS_file <- "COVID19_HGI_B1_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
 GWAS_phenotype <- "Hospitalized_(ver_non-hospitalised)"
 exposure <- "selenium_toenail"
+simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
+
+instrument_file <- "selenium_subsignificant_alspac.txt"
+GWAS_file <- "COVID19_HGI_B1_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
+GWAS_phenotype <- "Hospitalized_(ver_non-hospitalised)"
+exposure <- "selenium_subsignificant_alspac"
+simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
+
+
+instrument_file <- "selenium_subsignificant_qimr.txt"
+GWAS_file <- "COVID19_HGI_B1_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
+GWAS_phenotype <- "Hospitalized_(ver_non-hospitalised)"
+exposure <- "selenium_subsignificant_qimr.txt"
 simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
 
 
@@ -194,11 +267,24 @@ GWAS_phenotype <- "v.severe_COVID-19"
 exposure <- "copper"
 simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
 
+instrument_file <- "copper_subsignificant.txt"
+GWAS_file <- "COVID19_HGI_A2_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
+GWAS_phenotype <- "v.severe_COVID-19"
+exposure <- "copper_subsignificant"
+simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
+
 
 instrument_file <- "zinc_instruments.txt"
 GWAS_file <- "COVID19_HGI_A2_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
 GWAS_phenotype <- "v.severe_COVID-19"
 exposure <- "zinc"
+simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
+
+
+instrument_file <- "zinc_subsignificant.txt"
+GWAS_file <- "COVID19_HGI_A2_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
+GWAS_phenotype <- "v.severe_COVID-19"
+exposure <- "zinc_subsignificant"
 simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
 
 
@@ -215,9 +301,23 @@ GWAS_phenotype <- "v.severe_COVID-19"
 exposure <- "selenium_toenail"
 simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
 
+instrument_file <- "selenium_subsignificant_qimr.txt"
+GWAS_file <- "COVID19_HGI_A2_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
+GWAS_phenotype <- "v.severe_COVID-19"
+exposure <- "selenium_subsignificant_qimr"
+simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
+
+
+instrument_file <- "selenium_subsignificant_alspac.txt"
+GWAS_file <- "COVID19_HGI_A2_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
+GWAS_phenotype <- "v.severe_COVID-19"
+exposure <- "selenium_subsignificant_alspac"
+simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
+
 
 instrument_file <- "vitamink_instruments.txt"
 GWAS_file <- "COVID19_HGI_A2_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
 GWAS_phenotype <- "v.severe_COVID-19"
 exposure <- "vitamin_K1"
 simplemr(instrument_file, GWAS_file, GWAS_phenotype, exposure)
+
