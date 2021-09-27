@@ -68,6 +68,22 @@ simplemr <- function(instrument_file, GWAS_file, GWAS_phenotype, exposure) {
 	odds_ratio_leave1out <- generate_odds_ratios(leave1out)
 	write.csv(odds_ratio_leave1out, paste0(output_file, "_leave1out.csv"), quote=T, row.names=F)
 
+	egger <- mr_egger_regression(b_exp=dat$beta.exposure, b_out=dat$beta.outcome, se_exp=dat$se.exposure, se_out=dat$se.outcome)
+
+	dat2 <- dat_to_MRInput(dat)
+	#MR Egger analysis
+	egg <- MendelianRandomization::mr_egger(dat2[[1]],
+	robust = FALSE,
+	penalized = FALSE,
+	correl = FALSE,
+	distribution = "normal",
+	alpha = 0.05)
+	
+	if (! is.null(egg)) {
+		egger_output <- data.frame(b=egger$b, se=egger$se, pval=egger$pval, b_intercept=egger$b_i, se_intercept=egger$se_i, pval_intercept=egger$pval_i, I2GX=egg$I.sq, outcome=GWAS_phenotype, exposure=exposure)
+		write.csv(egger_output, paste0(output_file, "_egger.csv"), quote=T, row.names=F)
+	}
+
 	p1 <- mr_scatter_plot(mr, dat)
 	ggsave(p1[[1]], file=paste0(output_file, "_scatterplot.pdf"), width=7, height=7)
 	#ggsave(p1[[1]], file=paste0(output_file, "_scatterplot.png"), width=7, height=7)
@@ -130,8 +146,7 @@ mr_cochraneq <- function(instrument_file, GWAS_file, GWAS_phenotype, exposure) {
 	all_ivw_results <- MendelianRandomization::mr_ivw(dat2[[1]])
 	cochranesq <- all_ivw_results$Heter.Stat
 	write.table(cochranesq, paste0(output_file, "_cochraneq.tsv"), quote=F)
-	print(all_ivw_results)
-}
+}	
 
 instrument_file <- "copper_instruments.txt"
 GWAS_file <- "COVID19_HGI_C2_ALL_eur_leave_23andme_20210107.outcome.prox.txt.gz"
@@ -420,8 +435,22 @@ loadFile <- function(x) {
   return (df)
 }
 
+loadFile2 <- function(x) {
+  print (x)
+  df <- read.csv(x, header=T, stringsAsFactors=F,row.names=NULL)
+  df$comparison <- x
+  return (df)
+}
+
  all <- list.files(pattern="\\mr.csv")
  all_normal <- lapply(all, loadFile)
  all_normal_together <- do.call(rbind,all_normal)
 
  write.csv(all_normal_together, "all_mr_results.csv", row.names=F)
+
+
+ all <- list.files(pattern="\\_egger.csv")
+ all_normal <- lapply(all, loadFile2)
+ all_normal_together <- do.call(rbind,all_normal)
+
+ write.csv(all_normal_together, "all_egger_results.csv", row.names=F)
