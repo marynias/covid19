@@ -198,7 +198,7 @@ forestplot2 <- function(df,
       )
   }
   
-  df$method <- factor(df$method, levels=c("Inverse variance weighted", "MR Egger", "Weighted median", "Weighted mode"))
+  df$method <- factor(df$method, levels=rev(c("Inverse variance weighted", "MR Egger", "Weighted median", "Weighted mode")))
 
   # Plot
   g <-
@@ -262,8 +262,8 @@ forestplot2 <- function(df,
     # Define the shapes to be used manually
     ggplot2::scale_shape_manual(values = c(21L, 22L, 23L, 24L, 25L)) +
     guides(
-      colour = guide_legend(reverse = FALSE),
-      shape = guide_legend(reverse = FALSE)
+      colour = guide_legend(reverse = TRUE),
+      shape = guide_legend(reverse = TRUE)
     )
   
   # Limits adjustment
@@ -540,7 +540,7 @@ forestplot3 <- function(df,
       )
   }
   
-  df$method <- factor(df$method, levels=c("Inverse variance weighted", "MR Egger", "Weighted median", "Weighted mode"))
+  df$method <- factor(df$method, levels=rev(c("Inverse variance weighted", "MR Egger", "Weighted median", "Weighted mode")))
   
   # Plot
   g <-
@@ -604,8 +604,8 @@ forestplot3 <- function(df,
     # Define the shapes to be used manually
     ggplot2::scale_shape_manual(values = c(21L, 22L, 23L, 24L, 25L)) +
     guides(
-      colour = guide_legend(reverse = FALSE),
-      shape = guide_legend(reverse = FALSE)
+      colour = guide_legend(reverse = TRUE),
+      shape = guide_legend(reverse = TRUE)
     )
   
   # Limits adjustment
