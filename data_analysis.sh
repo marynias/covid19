@@ -64,5 +64,7 @@ done < covid19_proxy.txt
 #Run basic MR analysis
 Rscript --vanilla $scripts/covid19_mr_analysis.R
 
+#Plot the results
+Rscript --vanilla $scripts/plot_odds_ratio_covid19.R
 
 
